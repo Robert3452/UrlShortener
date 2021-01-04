@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Url from '../repositories/Urls.repos';
-
+import boom from '@hapi/boom'
 const urlRepo = new Url();
 
 export const shortUrl = async (req: Request, res: Response, next: NextFunction) => {
@@ -9,7 +9,7 @@ export const shortUrl = async (req: Request, res: Response, next: NextFunction) 
 
         let regex = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
         if (!regex.test(url)) {
-            return next("no es una url")
+            return next(boom.badRequest("Lo sentimos, lo que ingresaste no es una url"))
         }
         const response = await urlRepo.store({ url });
 
@@ -21,6 +21,14 @@ export const shortUrl = async (req: Request, res: Response, next: NextFunction) 
 
     } catch (error) {
         next(error)
+    }
+}
+
+export const getUrls = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        
+    } catch (error) {
+        
     }
 }
 

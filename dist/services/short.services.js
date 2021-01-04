@@ -39,8 +39,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUrl = exports.shortUrl = void 0;
+exports.getUrl = exports.getUrls = exports.shortUrl = void 0;
 var Urls_repos_1 = __importDefault(require("../repositories/Urls.repos"));
+var boom_1 = __importDefault(require("@hapi/boom"));
 var urlRepo = new Urls_repos_1.default();
 var shortUrl = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var url, regex, response, error_1;
@@ -51,7 +52,7 @@ var shortUrl = function (req, res, next) { return __awaiter(void 0, void 0, void
                 url = req.body.url;
                 regex = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
                 if (!regex.test(url)) {
-                    return [2 /*return*/, next("no es una url")];
+                    return [2 /*return*/, next(boom_1.default.badRequest("Lo sentimos, lo que ingresaste no es una url"))];
                 }
                 return [4 /*yield*/, urlRepo.store({ url: url })];
             case 1:
@@ -69,6 +70,16 @@ var shortUrl = function (req, res, next) { return __awaiter(void 0, void 0, void
     });
 }); };
 exports.shortUrl = shortUrl;
+var getUrls = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+        }
+        catch (error) {
+        }
+        return [2 /*return*/];
+    });
+}); };
+exports.getUrls = getUrls;
 var getUrl = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var id, response, error_2;
     return __generator(this, function (_a) {

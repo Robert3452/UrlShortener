@@ -1,5 +1,4 @@
 import { Document, Schema, model, Model } from 'mongoose';
-import { v4 as uuid } from 'uuid';
 
 import makeId from '../utils/makeIds'
 
